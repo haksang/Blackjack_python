@@ -43,8 +43,11 @@ def ask_yesno(prompt):
     answer = raw_input()
     if answer == "y":
         return True
-    else:
+    elif answer == "n":
         return False
+    else:
+        print "I beg your pardon!"
+        ask_yesno(prompt)
     """
     Display the text prompt and let's the user enter a string.
     If the user enters "y", the function returns "True", 
