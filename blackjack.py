@@ -1,11 +1,19 @@
 import random
 
+deck = []
 suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
 face_names = ['None', 'Ace', '2', '3', '4', '5', '6', \
               '7', '8', '9', '10', 'Jack', 'Queeen', 'King']
 value = [0, 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 def create_deck():
+    for i in range(len(suit_names)):
+        for j in range(len(face_names)-1):
+            card = [suit_names[i], face_names[j+1], value[j+1]]
+            deck.append(card)
+    random.shuffle(deck)
+    return deck
+
     """
     Create a list("deck") of all 52 cards, shuffle them, and return the list
     A card is represented by a tuple with three elements: the face, the suit, and the value
@@ -13,18 +21,30 @@ def create_deck():
     """
     
 def hand_value(hand):
+    sum = 0
+    for value in hand:
+        sum += value[-1]
+    return sum
     """
     Compute the value of the cards in the list "hand"
     """    
     
 
 def card_string(card):
+    return card[1] + " of " + card[0]
+
     """
     Return a nice string to represent a card 
     (such as "a King of Spades" or "an Ace of Diamonds")
     """    
 
 def ask_yesno(prompt):
+    print prompt
+    answer = raw_input()
+    if answer == "y":
+        return True
+    else:
+        return False
     """
     Display the text prompt and let's the user enter a string.
     If the user enters "y", the function returns "True", 
@@ -39,7 +59,6 @@ while True:
     # prompt for starting a new game and create a deck
     print "Welcome to Black Jack!\n"
     deck = create_deck()
-    
     # create two hands of dealer and player
     dealer = []
     player = []
